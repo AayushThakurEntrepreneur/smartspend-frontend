@@ -5,7 +5,8 @@ const ChatbotUI = ({ initialPrompt, setInitialPrompt }) => {
     { role: 'bot', text: "Hey! I'm your SmartSpend Assistant 💬 Ask me anything about savings or spending." }
   ]);
   const [input, setInput] = useState('');
-  const apiKey = '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';
+  const apiKey = process.env.REACT_APP_OPENROUTER_API_KEY;
+
 
   const sendMessage = async (msgToSend) => {
     const userMsg = msgToSend || input;
