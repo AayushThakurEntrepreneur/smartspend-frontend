@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useNavigate, Link } from 'react-router-dom';
+import API from '../services/api';
 
 const Register = () => {
   const [name, setName] = useState('');
@@ -14,19 +15,13 @@ const Register = () => {
 
     try {
       // Step 1: Register the user
-      const res = await axios.post('http://localhost:5000/api/auth/register', {
-        name,
-        email,
-        password,
-      });
+      const res = await API.post('/api/auth/register', { name, email, password });
 
       toast.success('Registration successful! Logging you in...');
 
       // Step 2: Immediately login the user
-      const loginRes = await axios.post('http://localhost:5000/api/auth/login', {
-        email,
-        password,
-      });
+      const loginRes = await API.post('/api/auth/login', { email, password });
+
 
       localStorage.setItem('smartspend-token', loginRes.data.token);
       localStorage.setItem('smartspend-user', JSON.stringify(loginRes.data.user));

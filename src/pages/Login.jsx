@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useNavigate, Link } from 'react-router-dom';
+import API from '../services/api';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -14,10 +15,7 @@ const Login = () => {
     console.log("📩 Email:", email);
     console.log("🔐 Password:", password);
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/login', {
-        email,
-        password,
-      });
+      const res = await API.post('/api/auth/login', { email, password });
 
       // Save token and user in localStorage
       localStorage.setItem('smartspend-token', res.data.token);
